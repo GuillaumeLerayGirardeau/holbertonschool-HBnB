@@ -85,8 +85,8 @@ class PlaceList(Resource):
         # Placeholder for logic to return a list of all places
         all_places = facade.get_all_places()
         place_list = []
-        amenities_list = []
         for i in all_places:
+            amenities_list = []
             for y in i.amenities:
                 amenities_list.append({
                     "id": y.id,

@@ -15,8 +15,8 @@
                 <h3>{{place_data.title}}</h3>
                 <p class="place-info">{{place_data.description}}</p>
                 <p class="place-info">{{place_data.price}} $ / night</p>
+                <p class="place-info">{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
                 <p class="place-info">{{place_data.owner.first_name}} {{place_data.owner.last_name}}</p>
-
             </div>
             {% endif %}
         </section>

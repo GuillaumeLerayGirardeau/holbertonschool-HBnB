@@ -1,0 +1,11 @@
+<header>
+    <div>
+        <img class="logo" src="{{ url_for('static', filename='images/logo.png') }}">
+        <button>
+            <a class="login-button" href="/login">Login</a>
+        </button>
+        <div>
+            {% include 'navbar.html' %}
+        </div>
+    </div>
+</header>

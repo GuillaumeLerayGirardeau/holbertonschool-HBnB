@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List of Places</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% include header %}
+    {% include 'header.html' %}
     <main>
         <section id="filter">
             <label for="price-filter">Max Price:</label>
@@ -15,11 +15,16 @@
                 <!-- Options will be populated dynamically -->
             </select>
         </section>
-        <section id="places-list">
-            <!-- List of places will be populated dynamically -->
-        </section>
+        <div class="place-card">
+            <section id="places-list">
+                <ul>
+                    <li>Cool place</li>
+                    <li>Nice castle</li>
+                </ul>
+            </section>
+        </div>
     </main>
     <script src="scripts.js"></script>
-    {% include footer %}
+    {% include 'footer.html' %}
 </body>
 </html>

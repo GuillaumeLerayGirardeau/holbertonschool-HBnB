@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for
 from flask_restx import Api
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
@@ -44,5 +44,17 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     # Register the protected namespace
     api.add_namespace(protected_ns, path='/api/v1/protected')
+
+    @app.route("/index")
+    def index():
+        return render_template('index.html')
+    
+    @app.route("/login")
+    def login():
+        return render_template('login.html')
+    
+    @app.route("/place")
+    def place():
+        return render_template('place.html')
 
     return app

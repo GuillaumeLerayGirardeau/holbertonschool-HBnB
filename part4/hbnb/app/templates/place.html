@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% include header %}
+    {% include 'header.html' %}
     <main>
         <section id="place-details">
             <!-- Place details will be populated dynamically -->
@@ -26,6 +26,6 @@
         </section>
     </main>
     <script src="scripts.js"></script>
-    {% include footer %}
+    {% include 'footer.html' %}
 </body>
 </html>

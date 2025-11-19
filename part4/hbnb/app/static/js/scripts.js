@@ -37,6 +37,14 @@ function place_list () {
           const host = document.createElement('p');
           host.textContent += place.host_first_name + " " + place.host_last_name;
           new_element.appendChild(host);
+          //add View Detail button
+          const details = document.createElement('a');
+          details.classList.add('details-button');
+          details.href = "/place";
+          const button = document.createElement('button');
+          button.textContent = "View Details";
+          details.appendChild(button);
+          new_element.appendChild(details);
 
           new_element.classList.add('place-card');
           places_list.appendChild(new_element);

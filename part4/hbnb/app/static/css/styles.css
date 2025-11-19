@@ -59,8 +59,15 @@ footer {
 }
 
 .place-card {
+    text-align: center;
     margin: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 30px;
+    border: 2px solid #ddd;
     border-radius: 10px;
+}
+
+#places-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 400px);
+    padding: 10px;
 }

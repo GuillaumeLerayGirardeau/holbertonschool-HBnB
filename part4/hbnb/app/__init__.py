@@ -1,8 +1,9 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_restx import Api
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
+import requests
 
 bcrypt = Bcrypt()
 jwt = JWTManager()
@@ -48,8 +49,7 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     @app.route("/index")
     def index():
-        place=Place.query.all()
-        return render_template('index.html', places=place)
+        return render_template('index.html')
     
     @app.route("/login")
     def login():
@@ -57,6 +57,10 @@ def create_app(config_class="config.DevelopmentConfig"):
     
     @app.route("/place")
     def place():
-        return render_template('place.html')
+        place_id = request.args.get('id')
+        place_api = 'http://localhost:5000/api/v1/places/' + place_id
+        place_data = requests.get(place_api)
+        place_data = place_data.json()
+        return render_template('place.html', place_data = place_data)
 
     return app

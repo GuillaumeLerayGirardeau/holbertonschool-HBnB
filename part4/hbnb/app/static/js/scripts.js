@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => place_list());
 
+// HOME - List of the places
 function place_list () {
     fetch('http://127.0.0.1:5000/api/v1/places/')
       .then(response => response.json())
@@ -40,11 +41,13 @@ function place_list () {
           //add View Detail button
           const details = document.createElement('a');
           details.classList.add('details-button');
-          details.href = "/place";
+          details.href = "/place?id=" + place.id;
           const button = document.createElement('button');
           button.textContent = "View Details";
           details.appendChild(button);
           new_element.appendChild(details);
+
+          details.addEventListener('click', () => show_place_details(place.id))
 
           new_element.classList.add('place-card');
           places_list.appendChild(new_element);
@@ -52,5 +55,28 @@ function place_list () {
       })
       .catch(error => {
       console.error('Erreur fetch:', error);
+    })
+}
+
+// PLACE - Details of the selected place
+function show_place_details(place_id) {
+  const complete_link = 'http://localhost:5000/api/v1/places/' + place_id;
+  console.log(complete_link);
+  fetch(complete_link)
+    .then(response => response.json())
+    .then(place => {
+      console.log('Status:', response.status);
+      const place_details = document.getElementById('place-details');
+      const datas = document.createElement('div');
+      // add title
+      const title = document.createElement('h3');
+      title.textContent = place.title;
+      datas.appendChild(title);
+      // test
+      const test = document.createElement('p');
+      test.textContent = "coucou";
+      datas.appendChild(test);
+
+      place_details.appendChild(datas);
     })
 }

@@ -10,7 +10,15 @@
     {% include 'header.html' %}
     <main>
         <section id="place-details">
-            <!-- Place details will be populated dynamically -->
+            {% if place_data %}
+            <div class="place-details">
+                <h3>{{place_data.title}}</h3>
+                <p class="place-info">{{place_data.description}}</p>
+                <p class="place-info">{{place_data.price}} $ / night</p>
+                <p class="place-info">{{place_data.owner.first_name}} {{place_data.owner.last_name}}</p>
+
+            </div>
+            {% endif %}
         </section>
         <section id="reviews">
             <!-- Reviews will be populated dynamically -->

@@ -16,6 +16,7 @@ def create_app(config_class="config.DevelopmentConfig"):
     from app.api.v1.reviews import api as reviews_ns
     from app.api.v1.auth import api as auth_ns
     from app.api.v1.protected import api as protected_ns
+    from app.models.place import Place
 
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -47,7 +48,8 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     @app.route("/index")
     def index():
-        return render_template('index.html')
+        place=Place.query.all()
+        return render_template('index.html', places=place)
     
     @app.route("/login")
     def login():

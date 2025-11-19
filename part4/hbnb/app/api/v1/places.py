@@ -85,10 +85,23 @@ class PlaceList(Resource):
         # Placeholder for logic to return a list of all places
         all_places = facade.get_all_places()
         place_list = []
+        amenities_list = []
         for i in all_places:
+            for y in i.amenities:
+                amenities_list.append({
+                    "id": y.id,
+                    "name": y.name
+                })
+            host_name = facade.get_user(i.owner_id)
             place_list.append({
                 "id": i.id,
                 "title": i.title,
+                "description": i.description,
+                "price": i.price,
+                "amenities": amenities_list,
+                "owner_id": i.owner_id,
+                "host_first_name": host_name.first_name,
+                "host_last_name": host_name.last_name,
                 "latitude": i.latitude,
                 "longitude": i.longitude
             })

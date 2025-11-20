@@ -4,6 +4,8 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => place_list());
+document.getElementById('login-form').addEventListener('submit', login_submit);
+document.getElementById('price-filter').addEventListener('change', (event) => price_filter(event));
 
 // HOME - List of the places
 function place_list () {
@@ -43,4 +45,33 @@ function place_list () {
       .catch(error => {
       console.error('Erreur fetch:', error);
     })
+}
+
+// LOGIN - send login request
+async function login_submit(event) {
+  event.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/auth/login', {
+      method: "POST",
+      body: JSON.stringify({
+        "email": email,
+        "password": password
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    if(response.ok) {
+      const data = await response.json();
+      document.cookie = `token=${data.access_token}; path=/`;
+      window.location.href = '/index';
+      alert('Welcome back !');
+    } else {
+      alert('Login failed: ' + response.statusText);
+    }
+  } catch (error) {
+    console.error("Erreur fetch:", error);
+  }
 }

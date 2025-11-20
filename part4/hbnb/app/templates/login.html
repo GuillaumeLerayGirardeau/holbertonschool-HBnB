@@ -20,7 +20,7 @@
             <button type="submit">Login</button>
         </form>
     </main>
-    <script src="/static/js/scripts.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     {% include 'footer.html' %}
 </body>
 </html>

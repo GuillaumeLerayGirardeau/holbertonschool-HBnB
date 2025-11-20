@@ -16,12 +16,10 @@
             </select>
         </section>
         <div>
-            <section id="places-list">
-                <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-            </section>
+            <section id="places-list"></section>
         </div>
     </main>
-    <script src="scripts.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
     {% include 'footer.html' %}
 </body>
 </html>

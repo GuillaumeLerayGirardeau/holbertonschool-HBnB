@@ -93,8 +93,13 @@ footer {
     text-align: center;
     margin: 20px;
     padding: 30px;
+    padding-top: 15px;
     border: 2px solid #ddd;
     border-radius: 10px;
+}
+
+.place-title {
+    margin-bottom: 2rem;
 }
 
 #places-list {
@@ -102,3 +107,26 @@ footer {
     grid-template-columns: repeat(auto-fit, 400px);
     padding: 10px;
 }
+
+.place-details {
+    text-align: center;
+    width: 25rem;
+    margin: 20px auto;
+    padding: 30px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+.details-title {
+    margin-bottom: 1rem;
+}
+
+.review-card {
+    text-align: left;
+    width: 350px;
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+

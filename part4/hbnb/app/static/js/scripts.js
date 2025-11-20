@@ -16,28 +16,16 @@ function place_list () {
           // add title
           const title = document.createElement('h3');
           title.textContent = place.title;
+          title.classList.add('place-title');
           new_element.appendChild(title);
           // add description
           const description = document.createElement('p');
           description.textContent = place.description;
           new_element.appendChild(description);
-          // add amenities
-          const amenities = document.createElement('p');
-          for (let i=0; i < place.amenities.length; i++) {
-            amenities.textContent += place.amenities[i]['name'];
-            if (i < place.amenities.length - 1) {
-              amenities.textContent += ", "
-            }
-          }
-          new_element.appendChild(amenities);
           // add price
           const price = document.createElement('p');
-          price.textContent = place.price;
+          price.textContent = place.price + "$";
           new_element.appendChild(price);
-          // add host
-          const host = document.createElement('p');
-          host.textContent += place.host_first_name + " " + place.host_last_name;
-          new_element.appendChild(host);
           //add View Detail button
           const details = document.createElement('a');
           details.classList.add('details-button');

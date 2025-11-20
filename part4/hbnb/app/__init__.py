@@ -58,9 +58,17 @@ def create_app(config_class="config.DevelopmentConfig"):
     @app.route("/place")
     def place():
         place_id = request.args.get('id')
+        # get the place data
         place_api = 'http://localhost:5000/api/v1/places/' + place_id
         place_data = requests.get(place_api)
         place_data = place_data.json()
-        return render_template('place.html', place_data = place_data)
+        # get the reviews 
+        place_reviews_api = 'http://localhost:5000/api/v1/reviews/places/' + place_id + '/reviews'
+        place_reviews = requests.get(place_reviews_api)
+        if place_reviews:
+            place_reviews = place_reviews.json()
+        else:
+            place_reviews = None
+        return render_template('place.html', place_data = place_data, place_reviews = place_reviews)
 
     return app

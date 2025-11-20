@@ -4,7 +4,12 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => place_list());
-document.getElementById('login-form').addEventListener('submit', login_submit);
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', login_submit)
+    }
+});
 document.getElementById('price-filter').addEventListener('change', (event) => price_filter(event));
 
 // HOME - List of the places

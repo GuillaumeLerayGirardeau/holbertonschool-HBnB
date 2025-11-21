@@ -71,4 +71,8 @@ def create_app(config_class="config.DevelopmentConfig"):
             place_reviews = None
         return render_template('place.html', place_data = place_data, place_reviews = place_reviews)
 
+    @app.route("/add_review")
+    def add_review():
+        return render_template('add_review.html')
+
     return app

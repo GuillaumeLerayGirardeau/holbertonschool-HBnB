@@ -4,15 +4,48 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-  checkAuthentication();
+  let isLogin = checkAuthentication();
+  const loginLink = document.getElementById('login-button');
+  const logoutLink = document.getElementById('logout-button');
+  if (isLogin) {
+    // affiche
+    logoutLink.style.display = 'block';
+    // masque
+    loginLink.style.display = 'none';
+  } else {
+    loginLink.style.display = 'block';
+    logoutLink.style.display = 'none';
+  }
   const places_list = document.getElementById('places-list');
   if (places_list) {
     place_list(Infinity);
-  }
+  };
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
       loginForm.addEventListener('submit', login_submit)
+  };
+  const priceFilter = document.getElementById('price-filter');
+  if (priceFilter) {
+      priceFilter.addEventListener('change', () => {
+        let maxValue = parseInt(document.getElementById('price-filter').value);
+        if (isNaN(maxValue)) {
+          maxValue = Infinity;
+        }
+        place_list(maxValue);
+    })
   }
+  const reviewButton = document.getElementById('add-review');
+  if (reviewButton) {
+    const button = document.getElementById('review-button');
+    if (isLogin) {
+      reviewButton.style.opacity = 1;
+      button.href = "/add_review";
+    } else {
+      reviewButton.style.opacity =  0.6;
+      button.style.cursor = 'not-allowed';
+      button.href = "";
+    }
+  };
 });
 document.getElementById('logout-button').addEventListener('click', () => logout());
 
@@ -95,16 +128,11 @@ async function login_submit(event) {
 
 function checkAuthentication() {
       const token = getCookie('token');
-      const loginLink = document.getElementById('login-button');
-      const logoutLink = document.getElementById('logout-button');
-
-      if (!token) {
-          loginLink.style.display = 'block';
-          logoutLink.style.display = 'none';
+      if (token) {
+        return true;
       } else {
-          logoutLink.style.display = 'block';
-          loginLink.style.display = 'none';
-      }
+        return false
+      };
   }
 
 function getCookie(name) {

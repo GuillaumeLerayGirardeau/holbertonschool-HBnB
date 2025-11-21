@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Review</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    {% include header %}
+    {% include 'header.html' %}
     <main>
         <!-- Add something to idfentify the place you're reviewing -->
         <form id="review-form">
@@ -16,12 +16,12 @@
             <textarea id="review" name="review" required></textarea>
             <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
-                <!-- Options for rating -->
+                
             </select>
             <button type="submit">Submit Review</button>
         </form>
     </main>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    {% include footer %}
+    {% include 'footer.html' %}
 </body>
 </html>

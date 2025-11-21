@@ -42,6 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
       button.href = "/add_review";
     } else {
       reviewButton.style.opacity =  0.6;
+      const message = document.createElement('p');
+      message.textContent = 'You must login to add a review';
+      message.classList.add('login-message');
+      reviewButton.appendChild(message);
       button.style.cursor = 'not-allowed';
       button.href = "";
     }

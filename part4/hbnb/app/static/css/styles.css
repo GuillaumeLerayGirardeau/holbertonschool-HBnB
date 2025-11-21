@@ -175,3 +175,9 @@ footer {
     border-radius: 10px;
 }
 
+.login-message {
+    padding: 1rem;
+    padding-top: 2rem;
+    color:crimson;
+}
+

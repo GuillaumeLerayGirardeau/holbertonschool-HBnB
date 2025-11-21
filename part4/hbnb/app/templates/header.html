@@ -1,7 +1,8 @@
 <header>
     <div>
         <a class="logo" href="/index"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"></a>
-        <a class="login-button" href="/login">Login</a>
+        <a id="login-button" href="/login">Login</a>
+        <a id="logout-button" href="/login">Logout</a>
         <div>
             {% include 'navbar.html' %}
         </div>

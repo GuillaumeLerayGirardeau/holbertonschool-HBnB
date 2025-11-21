@@ -11,6 +11,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #f4f4f4;
     color: #333;
 }
@@ -36,6 +39,7 @@ nav a {
 }
 
 main {
+    flex: 1;
     padding: 2rem;
 }
 
@@ -46,7 +50,7 @@ footer {
     text-align: center;
 }
 
-.login-button {
+#login-button {
     position: absolute;
     top: 1.5rem;
     right: 2rem;
@@ -59,7 +63,27 @@ footer {
     border: 2px solid #ddd;
 }
 
-.login-button:hover {
+#login-button:hover {
+    background-color: #ddd;
+    color: #333;
+    border: 2px solid #333;
+    transition-duration: 300ms;
+}
+
+#logout-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    z-index: 2;
+    padding: 1rem 2rem;
+    color: #ddd;
+    text-decoration: none;
+    background-color: #333;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+}
+
+#logout-button:hover {
     background-color: #ddd;
     color: #333;
     border: 2px solid #333;
@@ -77,11 +101,12 @@ footer {
     background-color:#f4f4f4;
     border-radius: 10px;
     border: 2px solid #ddd;
+    transition-duration: 150ms;
 }
 
 .view-details-button:hover {
     box-shadow: 0 5px 5px #ddd;
-    transition-duration: 150ms;
+    transition: 150ms;
 }
 
 .logo {

@@ -3,48 +3,60 @@
   Please, follow the project instructions to complete the tasks.
 */
 
-document.addEventListener('DOMContentLoaded', () => place_list());
 document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', login_submit)
-    }
+  checkAuthentication();
+  const places_list = document.getElementById('places-list');
+  if (places_list) {
+    place_list(Infinity);
+  }
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+      loginForm.addEventListener('submit', login_submit)
+  }
 });
-document.getElementById('price-filter').addEventListener('change', (event) => price_filter(event));
+document.getElementById('logout-button').addEventListener('click', () => logout());
 
 // HOME - List of the places
-function place_list () {
-    fetch('http://127.0.0.1:5000/api/v1/places/')
+function place_list (maxValue) {
+  document.getElementById('price-filter').addEventListener('change', () => {
+        let maxValue = parseInt(document.getElementById('price-filter').value);
+        if (isNaN(maxValue)) {
+          maxValue = Infinity;
+        }
+        place_list(maxValue);
+    });
+  fetch('http://127.0.0.1:5000/api/v1/places/')
       .then(response => response.json())
       .then (data => {
-        places_list = document.getElementById('places-list');
+        let places_list = document.getElementById('places-list');
+        places_list.textContent = "";
         data.forEach(place => {
-          const new_element = document.createElement('div');
-          // add title
-          const title = document.createElement('h3');
-          title.textContent = place.title;
-          title.classList.add('place-title');
-          new_element.appendChild(title);
-          // add description
-          const description = document.createElement('p');
-          description.textContent = place.description;
-          new_element.appendChild(description);
-          // add price
-          const price = document.createElement('p');
-          price.textContent = place.price + "$";
-          new_element.appendChild(price);
-          //add View Detail button
-          const details = document.createElement('a');
-          details.classList.add('details-button');
-          details.href = "/place?id=" + place.id;
-          details.textContent = "View Details";
-          details.classList.add('view-details-button');
-          new_element.appendChild(details);
-
-          details.addEventListener('click', () => show_place_details(place.id))
-
-          new_element.classList.add('place-card');
-          places_list.appendChild(new_element);
+          if (maxValue != NaN && place.price <= maxValue) {
+            const new_element = document.createElement('div');
+            // add title
+            const title = document.createElement('h3');
+            title.textContent = place.title;
+            title.classList.add('place-title');
+            new_element.appendChild(title);
+            // add description
+            const description = document.createElement('p');
+            description.textContent = place.description;
+            new_element.appendChild(description);
+            // add price
+            const price = document.createElement('p');
+            price.textContent = place.price + "$";
+            new_element.appendChild(price);
+            //add View Detail button
+            const details = document.createElement('a');
+            details.classList.add('details-button');
+            details.href = "/place?id=" + place.id;
+            details.textContent = "View Details";
+            details.classList.add('view-details-button');
+            new_element.appendChild(details);
+  
+            new_element.classList.add('place-card');
+            places_list.appendChild(new_element);
+          }
         })
       })
       .catch(error => {
@@ -79,4 +91,34 @@ async function login_submit(event) {
   } catch (error) {
     console.error("Erreur fetch:", error);
   }
+}
+
+function checkAuthentication() {
+      const token = getCookie('token');
+      const loginLink = document.getElementById('login-button');
+      const logoutLink = document.getElementById('logout-button');
+
+      if (!token) {
+          loginLink.style.display = 'block';
+          logoutLink.style.display = 'none';
+      } else {
+          logoutLink.style.display = 'block';
+          loginLink.style.display = 'none';
+      }
+  }
+
+function getCookie(name) {
+    const allCookies = document.cookie.split(';');
+
+    for (let cookie of allCookies) {
+      const [key, value] = cookie.trim().split('=');
+      if (key === name) {
+        return value;
+      }
+    }
+    return null;
+}
+
+async function logout() {
+  document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }

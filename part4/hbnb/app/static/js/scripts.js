@@ -22,11 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const loginForm = document.getElementById('login-form');
   if (loginForm) {
-      loginForm.addEventListener('submit', login_submit)
+    loginForm.addEventListener('submit', login_submit)
   };
   const reviewForm = document.getElementById('review-form');
   if (reviewForm) {
+    if (isLogin) {
       reviewForm.addEventListener('submit', review_submit)
+    } else {
+      window.location.href = '/index';
+    }
   };
   const priceFilter = document.getElementById('price-filter');
   if (priceFilter) {
@@ -162,9 +166,11 @@ async function review_submit(event) {
       }
     })
     if(response.ok) {
-      alert('Your review have been submited !');
+      alert('Review submitted successfully !');
+      document.getElementById('review').value = "";
+      document.getElementById('rating').value = 1;
     } else {
-      alert('Error: ' + response.statusText);
+      alert('Failed to submit review');
     }
   } catch (error) {
     console.error("Erreur fetch:", error);

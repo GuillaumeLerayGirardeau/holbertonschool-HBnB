@@ -15,7 +15,11 @@
                 <h3 class="details-title">{{place_data.title}}</h3>
                 <p class="place-info">{{place_data.description}}</p>
                 <p class="place-info">{{place_data.price}} $ / night</p>
-                <p class="place-info">{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
+                {% if place_data.amenities %}
+                    <p class="place-info">{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
+                {% else %}
+                    <p class="place-info">No amenities</p>
+                {% endif %}
                 <p class="place-info">{{place_data.owner.first_name}} {{place_data.owner.last_name}}</p>
             </div>
             {% endif %}

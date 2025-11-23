@@ -25,35 +25,25 @@ class ReviewList(Resource):
     def post(self):
         """Register a new review"""
         try:
-            print("token")
             current_user = get_jwt_identity()
             data = api.payload
-            print("user found")
             if not facade.get_user(data["user_id"]):
                 return {"error": "User not found"}, 404
-            print("place found")
             if not facade.get_place(data["place_id"]):
                 return {"error": "Place not found"}, 404
-            print("token is not the user")
             if data["user_id"] != current_user:
                 return {'error': 'Unauthorized action.'}, 403
-            print("user is owner")
             current_place = facade.get_place(data["place_id"])
-            print("have the place id")
-            print(current_place)
-            print(current_place.owner_id)
             if current_place.owner_id == current_user:
                 return {
                     'error': 'You cannot review your own place.'
                 }, 403
-            print("by place")
             all_reviews = facade.get_reviews_by_place(current_place.id)
             for review in all_reviews:
                 if review.user_id == current_user:
                     return {
                         'error': 'You have already reviewed this place.'
                     }, 403
-            print("All ok")
             review = facade.create_review(data)
             return {
                 "id": review.id,

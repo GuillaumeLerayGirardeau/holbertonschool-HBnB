@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loginForm) {
       loginForm.addEventListener('submit', login_submit)
   };
+  const reviewForm = document.getElementById('review-form');
+  if (reviewForm) {
+      reviewForm.addEventListener('submit', review_submit)
+  };
   const priceFilter = document.getElementById('price-filter');
   if (priceFilter) {
       priceFilter.addEventListener('change', () => {
@@ -39,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('review-button');
     if (isLogin) {
       reviewButton.style.opacity = 1;
-      button.href = "/add_review";
     } else {
       reviewButton.style.opacity =  0.6;
       const message = document.createElement('p');
@@ -120,10 +123,48 @@ async function login_submit(event) {
     if(response.ok) {
       const data = await response.json();
       document.cookie = `token=${data.access_token}; path=/`;
+      document.cookie = `user_id=${data.user_id}; path=/`;
       window.location.href = '/index';
       alert('Welcome back !');
     } else {
       alert('Login failed: ' + response.statusText);
+    }
+  } catch (error) {
+    console.error("Erreur fetch:", error);
+  }
+}
+
+// REVIEW - send review request
+async function review_submit(event) {
+  event.preventDefault();
+  const review = document.getElementById('review').value;
+  const rating = Number(document.getElementById('rating').value);
+  const id_data = new URLSearchParams(window.location.search);
+  const place_id = id_data.get('id');
+  console.log("review:", review);
+  console.log("rating:", rating);
+  console.log("user_id:", getCookie('user_id'));
+  console.log("place_id:", place_id);
+  console.log("Authorization:", "Bearer " + getCookie('token'));
+
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/reviews', {
+      method: "POST",
+      body: JSON.stringify({
+        "text": review,
+        "rating": rating,
+        "user_id": getCookie('user_id'),
+        "place_id": place_id
+      }),
+      headers: {
+        "Authorization": "Bearer " + getCookie('token'),
+        "Content-Type": "application/json"
+      }
+    })
+    if(response.ok) {
+      alert('Your review have been submited !');
+    } else {
+      alert('Error: ' + response.statusText);
     }
   } catch (error) {
     console.error("Erreur fetch:", error);
@@ -153,4 +194,5 @@ function getCookie(name) {
 
 async function logout() {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
 }

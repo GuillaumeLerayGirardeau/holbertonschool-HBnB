@@ -16,7 +16,8 @@
                 <p class="place-info">{{place_data.description}}</p>
                 <p class="place-info">Price per night : {{place_data.price}}$</p>
                 {% if place_data.amenities %}
-                    <p class="place-info">{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
+                    <p class="place-info"> Amenitites :</p>
+                    <p>{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
                 {% else %}
                     <p class="place-info">No amenities</p>
                 {% endif %}

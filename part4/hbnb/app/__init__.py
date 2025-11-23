@@ -74,7 +74,9 @@ def create_app(config_class="config.DevelopmentConfig"):
     @app.route("/add_review")
     def add_review():
         place_id = request.args.get('id')
-        
-        return render_template('add_review.html', place_id = place_id)
+        place_api = 'http://localhost:5000/api/v1/places/' + place_id
+        place_data = requests.get(place_api)
+        place_data = place_data.json()
+        return render_template('add_review.html', place_data = place_data)
 
     return app

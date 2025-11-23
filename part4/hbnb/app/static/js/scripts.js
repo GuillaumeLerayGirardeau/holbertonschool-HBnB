@@ -7,13 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let isLogin = checkAuthentication();
   const loginLink = document.getElementById('login-button');
   const logoutLink = document.getElementById('logout-button');
+  const loginNav = document.getElementById('login-link');
   if (isLogin) {
     // affiche
     logoutLink.style.display = 'block';
     // masque
     loginLink.style.display = 'none';
+    loginNav.style.display = 'none';
   } else {
     loginLink.style.display = 'block';
+    loginNav.style.display = 'block';
     logoutLink.style.display = 'none';
   }
   const places_list = document.getElementById('places-list');
@@ -88,7 +91,7 @@ function place_list (maxValue) {
             new_element.appendChild(description);
             // add price
             const price = document.createElement('p');
-            price.textContent = place.price + "$";
+            price.textContent = "Price per night : " + place.price + "$";
             new_element.appendChild(price);
             //add View Detail button
             const details = document.createElement('a');

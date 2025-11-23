@@ -10,19 +10,23 @@
     {% include 'header.html' %}
     <main>
         <form id="review-form">
-            <h2>Add a Review</h2>
-            <label for="review">Your Review:</label>
+            <h2>Add a review for {{ place_data.title }}</h2>
+            <label for="review" class="review">Your Review:</label>
+            <br>
             <textarea id="review" name="review" required></textarea>
+            <br>
             <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
+                <option value="" disabled selected> </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
+            <br>
             
-            <button type="submit">Submit Review</button>
+            <button class="review-button" type="submit">Submit Review</button>
         </form>
     </main>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>

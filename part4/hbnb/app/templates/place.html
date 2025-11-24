@@ -38,9 +38,16 @@
                 {% if place_reviews %}
                     {% for review in place_reviews%}
                     <div class="review-card">
-                        <p>{{review.user.first_name}} {{review.user.last_name}}</p>
-                        <p>{{review.text}}</p>
-                        <p>{{review.rating}} ★</p>
+                        <p><i>{{review.user.first_name}} {{review.user.last_name}}</i></p>
+                        {% for star in range(review.rating) %}
+                            <p style="display: inline;">★</p>
+                        {% endfor %}
+                        {% if review.rating < 5 %}
+                            {% for empty in range(5 - review.rating) %}
+                                <p style="display: inline;">☆</p>
+                            {% endfor %}
+                        {% endif %}
+                        <p style="margin-top: 1rem;">{{review.text}}</p>
                     </div>
                     {% endfor %}
                 {% else %}

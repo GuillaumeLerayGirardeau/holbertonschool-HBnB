@@ -161,7 +161,7 @@ class PlaceResource(Resource):
             if "price" in place_data:
                 if place_data['price'] < 0:
                     return {"error": "Your place must cost at least 0€"}, 400
-            if place_data["amenities"]:
+            if "amenities" in place_data:
                 amenity_list = []
                 for name in place_data["amenities"]:
                     new_a = facade.get_amenity_by_name(name)
@@ -194,6 +194,7 @@ class AdminPlaceModify(Resource):
         # Placeholder for the logic to update a place by ID
         try:
             admin = get_jwt()
+            print("ok")
             place_data = api.payload
             if not admin["is_admin"]:
                 return {'error': 'Admin privileges required'}, 403
@@ -206,7 +207,7 @@ class AdminPlaceModify(Resource):
             if "price" in place_data:
                 if place_data['price'] < 0:
                     return {"error": "Your place must cost at least 0€"}, 400
-            if place_data["amenities"]:
+            if "amenities" in place_data:
                 amenity_list = []
                 for name in place_data["amenities"]:
                     new_a = facade.get_amenity_by_name(name)
@@ -215,6 +216,7 @@ class AdminPlaceModify(Resource):
                     else:
                         amenity_list.append(new_a)
                 place_data["amenities"] = amenity_list
+            print("ok")
             place = facade.get_place(place_id)
             if not place:
                 return {"error": "Place not found"}, 404

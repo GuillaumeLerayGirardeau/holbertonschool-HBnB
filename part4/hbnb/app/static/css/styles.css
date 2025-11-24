@@ -20,6 +20,7 @@ body {
 
 header {
     position: sticky;
+    top: 0;
     background-color: #4b9a45;
     color: #fff;
     padding: 1rem;

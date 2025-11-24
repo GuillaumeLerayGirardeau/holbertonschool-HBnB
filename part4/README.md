@@ -46,6 +46,20 @@ pip install -r requirements.txt
 ````
 python3 run.py
 ````
+- On your web browser, add '/index' at the end of the url to access the home menu of the application :
+````
+http://127.0.0.1:5000/index
+````
+- You can login to an existing user by using those emails and passwords. Note that Superman is the admin user :
+````
+Regular user :
+email: johndoe@gmail.com
+password: azerty
+
+Admin user:
+email: superman@gmail.com
+password: azerty
+````
 This project use Python3, you may want to have a similar version of Python to avoid errors.
 
 ## Core Business Logic Classes

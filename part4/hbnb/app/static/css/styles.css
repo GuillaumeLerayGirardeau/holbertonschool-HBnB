@@ -162,9 +162,7 @@ footer {
 }
 
 .place-details {
-    text-align: center;
-    width: 25rem;
-    margin: 20px auto;
+    margin: 20px 50px;
     padding: 30px;
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -175,6 +173,7 @@ footer {
 }
 
 .details-title {
+    text-align: center;
     margin-bottom: 1rem;
 }
 
@@ -199,15 +198,15 @@ footer {
 }
 
 #review {
-    width: 50rem;
-    height: 10rem;
+    margin: 0.5rem;
+    width: 50%;
+    height: 15rem;
     font-size: 18px;
     border: 2px solid #333;
 }
 
 .review {
-    display: block;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 #rating {

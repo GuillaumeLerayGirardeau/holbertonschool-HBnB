@@ -13,16 +13,22 @@
             {% if place_data %}
             <div class="place-details">
                 <h3 class="details-title">{{place_data.title}}</h3>
-                <p class="place-info">{{place_data.description}}</p>
-                <p class="place-info">Price per night : {{place_data.price}}$</p>
+                <p class="place-info"><b>Description :</b><br>{{place_data.description}}</p>
+                <p class="place-info"><b>Location (lat, lon) :</b> {{place_data.latitude}}, {{place_data.longitude}}</p>
+                <p class="place-info"><b>Price per night :</b> {{place_data.price}}$</p>
                 {% if place_data.amenities %}
-                    <p class="place-info"> Amenitites :</p>
+                    <p class="place-info"><b>Amenitites :</b></p>
                     <p>{{ place_data.amenities | map(attribute='name') | join(', ') }}</p>
                 {% else %}
                     <p class="place-info">No amenities</p>
                 {% endif %}
-                <p class="place-info">Host : {{place_data.owner.first_name}} {{place_data.owner.last_name}}</p>
-                <p class="place-info">Contact : {{place_data.owner.email}}</p>
+                <div id="host-info">
+                    <p class="place-info"><b>Book this place :</b></p>
+                    <div id="host-box">
+                        <p class="place-info"><b>Host :</b> {{place_data.owner.first_name}} {{place_data.owner.last_name}}</p>
+                        <p class="place-info"><b>Contact :</b> {{place_data.owner.email}}</p>
+                    </div>
+                </div>
             </div>
             {% endif %}
         </section>

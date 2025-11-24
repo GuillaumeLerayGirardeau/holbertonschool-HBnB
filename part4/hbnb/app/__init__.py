@@ -50,7 +50,7 @@ def create_app(config_class="config.DevelopmentConfig"):
 
     @app.route("/")
     def home():
-        return redirect(url_for('index'))
+        return redirect('/index')
 
 
     @app.route("/index")

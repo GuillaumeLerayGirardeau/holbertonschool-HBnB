@@ -47,17 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const reviewButton = document.getElementById('add-review');
   if (reviewButton) {
-    const button = document.getElementById('review-button');
+    const button = document.getElementById('add-review-button');
     if (isLogin) {
-      reviewButton.style.opacity = 1;
+      button.setAttribute('disabled');
+      button.style.cursor = 'pointer';
+      button.style.opacity = 1;
     } else {
-      reviewButton.style.opacity =  0.6;
+      button.setAttribute('disabled', 'true');
+      button.style.opacity = 0.5;
       const message = document.createElement('p');
       message.textContent = 'You must login to add a review';
       message.classList.add('login-message');
       reviewButton.appendChild(message);
-      button.style.cursor = 'not-allowed';
-      button.href = "";
+      reviewButton.style.cursor = 'not-allowed';
+      button.style.pointerEvents = "none";
     }
   };
 });
